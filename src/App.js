@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/UI/NavBar'
+import Data from './components/Data'
+import Main from './components/Main/Main'
+import {Route, Switch} from 'react-router-dom'
+import Movie from './components/Movie/Movie'
+import Home from './components/Home/Home'
+import CustomSelect from './components/UI/CustomSelect'
+import { useState } from 'react';
 
 function App() {
+  const[rating,setRating]= useState('')
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <NavBar/>
+       <CustomSelect/>
+       <Switch>
+         <Route exact path='/' render={()=> <Main Data={Data}/>}/>
+         <Route path='/Movie/:id' render={()=> <Movie Data={Data}/>}/>
+         <Route path='/Movie' render={()=> <Home Data={Data}/>}/>
+       </Switch>
     </div>
   );
 }
